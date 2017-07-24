@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import './App.css';
+import Food from './food';
 
-// eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   constructor() {
     super();
@@ -13,17 +13,28 @@ class App extends Component {
       this.setState({ foods: data });
     });
   }
+
+  addFood() {
+    return this;
+  }
+
   render() {
-    const foodItems = this.state.foods ? this.state.foods.map((food, index) => <div key={index}>{food.name}</div>) : 'No Food Items';
+    const foodItems = this.state.foods ?
+        this.state.foods.map(food => <Food
+          key={food.id}
+          name={food.name}
+          unit={food.unit}
+        />) :
+        'No Food Items';
 
     return (
       <div>
         <h1>FOODZ</h1>
         <div>{foodItems}</div>
+        <button onClick={this.addFood}>Add Food</button>
       </div>
     );
   }
-
 }
 
 export default App;
