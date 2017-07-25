@@ -3,8 +3,15 @@ import '../App.css';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class App extends Component {
-
+class SearchBar extends Component {
+  render() {
+    return (
+      <form>
+        <input type="text" name="search" />
+        <input type="submit" value="Search" />
+      </form>
+    );
+  }
 }
 
-export default App;
+export default SearchBar;

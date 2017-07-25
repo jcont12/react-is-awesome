@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import '../App.css';
+import NavBar from './NavBar';
+import SearchBar from './SearchBar';
+import Header from './Header';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class App extends Component {
-
+class PageBody extends Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <NavBar />
+        <SearchBar />
+      </div>
+    );
+  }
 }
 
-export default App;
+export default PageBody;

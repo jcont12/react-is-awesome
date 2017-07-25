@@ -3,7 +3,7 @@ import '../App.css';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class App extends Component {
+class NavBarItem extends Component {
   render() {
     return (
       <h1>Hello!</h1>
@@ -11,4 +11,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default NavBarItem;
