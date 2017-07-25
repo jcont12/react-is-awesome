@@ -4,6 +4,13 @@ import './App.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,12 +27,14 @@ class Login extends Component {
   render() {
     return (
       <p>
-        <form method='post' action='/sessions'>
-          <input type='text' name='session[name]' placeholder='Name' />
-          <input type='password' name='session[password]' placeholder='Password' />
-          <input type='submit' name='login' value='Log In' />
+        <form id='login-form' method='post' action='http://localhost:3000/sessions'>
+          <input type='text' name='user[name]' placeholder='Name' />
+          <input type='password' name='user[password]' placeholder='Password' />
+          <input type='submit' name='login' value='Log In'
+            onClick={props.onClick}/>
         </form>
       </p>
+      // {"user_id":431,"token":"eyJ0b2tlbiI6NDMxfQ==\n"}
     );
   }
 }
