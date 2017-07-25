@@ -3,12 +3,10 @@ import '../App.css';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class App extends Component {
-  render() {
-    return (
-      <h1>Hello!</h1>
-    );
-  }
+function Header(props) {
+  return (
+    <h1>{props.title}</h1>
+  );
 }
 
-export default App;
+export default Header;

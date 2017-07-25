@@ -10,17 +10,17 @@ class NavBar extends Component {
     this.state = {
       linkData: [
         { text: 'Home', url: '/' },
-        { text: 'Log In', url: '/login' },
+        { text: 'Log In', url: '/sessions/new' },
         { text: 'Sign Up', url: '/users/new' },
       ],
     };
   }
   render() {
     const links = this.state.linkData.map(link =>
-      <NavBarItem text={link.text} url={link.url} key={link.id} />,
+      <NavBarItem text={link.text} url={link.url} key={link.text} />,
     );
     return (
-      <div>{links}</div>
+      <ul>{links}</ul>
     );
   }
 }

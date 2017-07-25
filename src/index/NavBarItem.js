@@ -3,12 +3,10 @@ import '../App.css';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
-class NavBarItem extends Component {
-  render() {
-    return (
-      <h1>Hello!</h1>
-    );
-  }
+function NavBarItem(props) {
+  return (
+    <a href={props.url}>{props.text}</a>
+  );
 }
 
 export default NavBarItem;

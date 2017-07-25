@@ -10,7 +10,7 @@ class PageBody extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header title="GoodReads"/>
         <NavBar />
         <SearchBar />
       </div>
