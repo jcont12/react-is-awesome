@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BookEntry from './BookEntry';
+import SearchBar from './SearchBar';
 import BookList from './BookList';
 import './App.css';
 
@@ -9,6 +9,7 @@ class App extends Component {
     return (
       <div>
         <h1>BookBook</h1>
+        <SearchBar />
         <BookList />
       </div>
     );

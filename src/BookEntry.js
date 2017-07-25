@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 function BookEntry(props) {
   return (
-    <div key={props.id}>
+    <div>
       <p>Title: {props.title}</p>
       <p>Author: {props.author}</p>
       <p>Genre: {props.genre}</p><br />

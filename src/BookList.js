@@ -27,12 +27,7 @@ class BookList extends Component {
 
   render() {
     const books = this.state.bookData.map(book =>
-      <BookEntry
-        title={book.title}
-        author={book.author}
-        genre={book.genre}
-        id={book.id}
-      />,
+      <BookEntry title={book.title} author={book.author} genre={book.genre} key={book.id} />,
     );
     return (
       <ul>{books}</ul>
