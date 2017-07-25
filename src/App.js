@@ -14,6 +14,7 @@ class App extends Component {
       readingList: [],
       savedLists: [],
       currentList: 1,
+      loadedList: false,
     };
   }
   componentDidMount() {
@@ -34,7 +35,11 @@ class App extends Component {
         const newBooks = this.state.books.filter(filterBook =>
           filterBook !== book,
         );
-        this.setState({ readingList: newBookList, books: newBooks });
+        this.setState({
+          readingList: newBookList,
+          books: newBooks,
+          loadedList: false,
+        });
       }
     };
 
@@ -44,18 +49,30 @@ class App extends Component {
           [{ list: this.state.readingList, id: this.state.currentList }]),
         currentList: this.state.currentList + 1,
         readingList: [],
+        loadedList: false,
       });
       this.getAllBooks();
+    };
+
+    const loadList = (listIndex) => {
+      this.setState({
+        readingList: this.state.savedLists[listIndex].list,
+        loadedList: true,
+      });
     };
 
     return (
       <div>
         <h1>BOOKZ</h1>
         <div>
-          <ReadingList books={this.state.readingList} saveList={saveList} />
+          <ReadingList
+            books={this.state.readingList}
+            saveList={saveList}
+            wasSaved={this.state.loadedList}
+          />
         </div>
         <div>
-          <SavedReadingLists lists={this.state.savedLists} />
+          <SavedReadingLists lists={this.state.savedLists} loadList={loadList} />
         </div>
         <h2>All Books</h2>
         <SelectableBookList books={this.state.books} selectBook={selectBook} />

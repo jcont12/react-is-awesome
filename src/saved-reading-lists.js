@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SavedReadingLists extends Component {
   render() {
-    const linklist = this.props.lists.map(list => <p key={list.id}><a href="#" onClick={() => this.props.loadList}>{`List ${list.id}`}</a></p>);
+    const linklist = this.props.lists.map(list => <p key={list.id}><a href="#" onClick={() => this.props.loadList(list.id - 1)}>{`List ${list.id}`}</a></p>);
     return (
       <div>{ linklist }</div>
     );
