@@ -8,7 +8,6 @@ class LoggedInNav extends Component {
         <li><button className="nav-button">Logout</button></li>
         <li><button className="nav-button">My Profile</button></li>
       </ul>
-
     );
   }
 }
