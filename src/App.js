@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import BookList from './BookList.js'
+import $ from 'jquery';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -15,7 +16,26 @@ class App extends Component {
   //     }
   //   }
   // }
+  constructor() {
+    super();
+    this.state = {
+      books: [],
+    }
+  }
 
+  componentDidMount() {
+    $.ajax(
+      {
+        method: 'GET',
+        url: 'http://localhost:3000/books'
+      }
+    ).done( data => {
+        console.log('just returned from GET, data to follow')
+        console.log(data)
+        this.setState({books: data});
+      }
+    );
+  }
 
   render() {
     return (
@@ -23,7 +43,7 @@ class App extends Component {
         <div className="App-header">
           <h2>Welcome to MyBooks</h2>
         </div>
-        <BookList />
+        <BookList books={this.state.books} />
       </div>
     );
   }
