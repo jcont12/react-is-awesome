@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import BookList from './BookList.js'
 import $ from 'jquery';
+import Nav from './Nav.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome to MyBooks</h2>
+          <Nav />
         </div>
         <BookList books={this.state.books} />
       </div>
