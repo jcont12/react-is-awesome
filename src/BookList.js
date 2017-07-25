@@ -12,6 +12,10 @@ class BookList extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getBookData();
+  }
+
   getBookData() {
     $.ajax({
       url: 'http://localhost:3000/books/',
@@ -21,16 +25,15 @@ class BookList extends Component {
     });
   }
 
-  componentDidMount() {
-    this.getBookData();
-  }
-
   render() {
-    const books = this.state.bookData.map((book) => {
-      return (
-          <BookEntry title={book.title} author={book.author} genre={book.genre} id={book.id} />
-      );
-    });
+    const books = this.state.bookData.map(book =>
+      <BookEntry
+        title={book.title}
+        author={book.author}
+        genre={book.genre}
+        id={book.id}
+      />,
+    );
     return (
       <ul>{books}</ul>
     );
