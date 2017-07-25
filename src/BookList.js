@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Book from './Book.js'
 
 class BookList extends Component {
   render() {
+    const BOOKS = ['Gone With the Wind','Jae Is Feeling Better','Sparky is Starting to Understand']
     return (
       <div>
-        THIS IS JAE's and SPARKY's BOOKLIST.
+        {BOOKS.map(name => {
+          return <Book name={name}/>})
+        }
       </div>
     );
   }

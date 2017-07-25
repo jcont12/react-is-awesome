@@ -22,8 +22,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome to MyBooks</h2>
-          <BookList />
         </div>
+        <BookList />
       </div>
     );
   }
