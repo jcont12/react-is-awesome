@@ -28,7 +28,10 @@ class BookList extends Component {
   render() {
     const books = [];
     this.state.bookData.forEach((book) => {
-      if (book.title.toLowerCase().indexOf(this.props.query) === -1) {
+      const noMatchTitle = book.title.toLowerCase().indexOf(this.props.query) === -1
+      const noMatchAuthor = book.author.toLowerCase().indexOf(this.props.query) === -1
+      const noMatchGenre = book.genre.toLowerCase().indexOf(this.props.query) === -1
+      if (noMatchTitle && noMatchAuthor && noMatchGenre) {
         return;
       }
       books.push(
