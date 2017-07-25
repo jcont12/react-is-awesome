@@ -38,12 +38,16 @@ class App extends Component {
     );
   }
 
+  logIn() {
+    console.log('yay!')
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <h2>Welcome to MyBooks</h2>
-          <Nav />
+          <Nav logInFunc={this.logIn} />
         </div>
         <BookList books={this.state.books} />
       </div>

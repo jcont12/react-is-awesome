@@ -4,10 +4,10 @@ class Nav extends Component {
   render() {
     return (
       <div>
-        <button>Login</button>
+        <button onClick={this.props.logInFunc}>Login</button>
         <button>Register</button>
         <button>Log Out</button>
-        <button>Log Out</button>
+        <button>Home</button>
       </div>
     );
   }
