@@ -18,7 +18,15 @@ class App extends Component {
 
 class Login extends Component {
   render() {
-    return <p>Login here</p>
+    return (
+      <p>
+        <form method='post' action='/sessions'>
+          <input type='text' name='session[name]' placeholder='Name' />
+          <input type='password' name='session[password]' placeholder='Password' />
+          <input type='submit' name='login' value='Log In' />
+        </form>
+      </p>
+    );
   }
 }
 
