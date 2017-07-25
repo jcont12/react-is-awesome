@@ -14,11 +14,25 @@ class ReadingList extends React.Component {
 
   render() {
     const bookItems = this.props.books.map((book, index) => this.renderBook(index));
-    return (<div>{bookItems}</div>);
+    let saveButton;
+    if (bookItems.length > 0) {
+      saveButton = <button onClick={this.props.saveList}>Save List</button>;
+    } else {
+      saveButton = <div />;
+    }
+    return (
+      <div>
+        <h2>Reading List</h2>
+        <div>{bookItems}</div>
+        {saveButton}
+      </div>
+    );
   }
 }
 
 ReadingList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  saveList: PropTypes.func.isRequired,
 };
+
 export default ReadingList;

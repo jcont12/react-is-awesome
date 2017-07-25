@@ -11,6 +11,7 @@ class App extends Component {
       books: [],
       selectedBooks: [],
       readingList: [],
+      savedLists: [],
     };
   }
   componentDidMount() {
@@ -34,11 +35,17 @@ class App extends Component {
         this.setState({ readingList: newBookList, books: newBooks });
       }
     };
+
+    const saveList = () => {
+      console.log('We should save the current list');
+    };
+
     return (
       <div>
         <h1>BOOKZ</h1>
-        <h2>Reading List</h2>
-        <div>{this.state.books ? <ReadingList books={this.state.readingList} /> : ''}</div>
+        <div>
+          <ReadingList books={this.state.readingList} saveList={saveList} />
+        </div>
         <h2>All Books</h2>
         <SelectableBookList books={this.state.books} selectBook={selectBook} />
       </div>
