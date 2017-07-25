@@ -13,12 +13,19 @@ class SelectableBookList extends React.Component {
   }
 
   render() {
-    const bookItems = this.props.books ?
-      this.props.books.map(book => <Book
-        key={book.id}
-        title={book.title}
-        author={book.author}
-      />) :
+    const bookItems = this.props.books.length > 0 ?
+      this.props.books.map((book) => {
+        const chooseBook = () => { this.props.selectBook(book); };
+        return (
+          <div key={book.id}>
+            <button onClick={chooseBook}>Add to List</button>
+            <Book
+              title={book.title}
+              author={book.author}
+            />
+          </div>
+        );
+      }) :
       'Loading books....';
     return <div>{bookItems}</div>;
   }
@@ -26,6 +33,7 @@ class SelectableBookList extends React.Component {
 
 SelectableBookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object),
+  selectBook: PropTypes.func.isRequired,
 };
 
 SelectableBookList.defaultProps = {
