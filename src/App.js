@@ -3,11 +3,12 @@ import $ from 'jquery';
 import './App.css';
 import Book from './book';
 import ReadingList from './reading-list';
+import SelectableBookList from './selectable-book-list'
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { books: null };
+    this.state = { books: [] };
   }
   componentDidMount() {
     $.get('http://localhost:3000/books', (data) => {
@@ -16,15 +17,7 @@ class App extends Component {
   }
 
   render() {
-    const bookItems = this.state.books ?
-        this.state.books.map(book => <Book
-          key={book.id}
-          title={book.title}
-          author={book.author}
-        />) :
-        'Loading books....';
-    const bookList = this.state.books ?
-      [this.state.books[0], this.state.books[3], this.state.books[7], this.state.books[9]] : null;
+    const bookList = [];
 
     return (
       <div>
@@ -32,7 +25,7 @@ class App extends Component {
         <h2>Reading List</h2>
         <div>{this.state.books ? <ReadingList books={bookList} /> : ''}</div>
         <h2>All Books</h2>
-        <div>{bookItems}</div>
+        <SelectableBookList books={this.state.books} />
       </div>
     );
   }
