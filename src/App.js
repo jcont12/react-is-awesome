@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import LoggedInNav from './LoggedInNav';
 import LoggedOutNav from './LoggedOutNav';
-
+import BookList from './BookList';
+import BookShow from './BookShow';
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   constructor() {
@@ -21,13 +22,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src="http://www.columbiactlibrary.org/wp-content/uploads/2012/10/books.png" className="App-logo" alt="logo" />
+          <img src="https://thumb7.shutterstock.com/display_pic_with_logo/636115/279332939/stock-photo-book-stack-of-books-covers-blank-colorful-textbooks-bookmark-school-studying-information-content-279332939.jpg" className="App-logo" alt="logo" />
           <h2>Welcome to Book Fools</h2>
         </div>
 
         <div className="nav">
           {navBar}
+          <div>
+          <BookShow />
         </div>
+        </div>
+        <BookList />
       </div>
     );
   }

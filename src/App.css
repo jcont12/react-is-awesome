@@ -5,7 +5,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 60s linear;
-  height: 150px;
+  height: 200px;
 }
 
 .App-header {
@@ -40,4 +40,12 @@
   border-radius: 10px;
   background-color: lime;
   /*animation: App-logo-spin infinite 7s linear;*/
+}
+
+.book-list:first-of-type{
+  margin-top: 120px;
+}
+
+.book-list li {
+  list-style-type: none;
 }
