@@ -3,6 +3,7 @@ import $ from 'jquery';
 import './App.css';
 import ReadingList from './reading-list';
 import SelectableBookList from './selectable-book-list';
+import SavedReadingLists from './saved-reading-lists';
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends Component {
       selectedBooks: [],
       readingList: [],
       savedLists: [],
+      currentList: 1,
     };
   }
   componentDidMount() {
@@ -37,7 +39,13 @@ class App extends Component {
     };
 
     const saveList = () => {
-      console.log('We should save the current list');
+      this.setState({
+        savedLists: this.state.savedLists.concat(
+          [{ list: this.state.readingList, id: this.state.currentList }]),
+        currentList: this.state.currentList + 1,
+        readingList: [],
+      });
+      this.getAllBooks();
     };
 
     return (
@@ -45,6 +53,9 @@ class App extends Component {
         <h1>BOOKZ</h1>
         <div>
           <ReadingList books={this.state.readingList} saveList={saveList} />
+        </div>
+        <div>
+          <SavedReadingLists lists={this.state.savedLists} />
         </div>
         <h2>All Books</h2>
         <SelectableBookList books={this.state.books} selectBook={selectBook} />

@@ -15,7 +15,7 @@ class ReadingList extends React.Component {
   render() {
     const bookItems = this.props.books.map((book, index) => this.renderBook(index));
     let saveButton;
-    if (bookItems.length > 0) {
+    if (bookItems.length > 0 && !this.props.wasSaved) {
       saveButton = <button onClick={this.props.saveList}>Save List</button>;
     } else {
       saveButton = <div />;
@@ -33,6 +33,11 @@ class ReadingList extends React.Component {
 ReadingList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
   saveList: PropTypes.func.isRequired,
+  wasSaved: PropTypes.bool,
+};
+
+ReadingList.defaultProps = {
+  wasSaved: false,
 };
 
 export default ReadingList;
