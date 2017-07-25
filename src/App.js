@@ -3,6 +3,7 @@ import './App.css';
 import BookList from './BookList.js'
 import $ from 'jquery';
 import Nav from './Nav.js'
+import Login from './Login.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      currentPage: 'Home',
       books: [],
     }
   }
@@ -31,25 +33,33 @@ class App extends Component {
         url: 'http://localhost:3000/books'
       }
     ).done( data => {
-        console.log('just returned from GET, data to follow')
-        console.log(data)
         this.setState({books: data});
       }
     );
   }
 
   logIn() {
-    console.log('yay!')
+    this.setState({ currentPage: 'Login' })
+    console.log('yay')
   }
 
   render() {
+    let content;
+
+    if( this.state.currentPage === 'Home' ) {
+        content = <BookList books={this.state.books} />
+      }
+    else if ( this.state.currentPage === 'Login' ) {
+      content = <Login />
+    }
+
     return (
       <div className="App">
         <div className="App-header">
           <h2>Welcome to MyBooks</h2>
-          <Nav logInFunc={this.logIn} />
+          <Nav logInFunc={this.logIn.bind(this)} />
         </div>
-        <BookList books={this.state.books} />
+        {content}
       </div>
     );
   }
