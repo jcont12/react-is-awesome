@@ -26,11 +26,26 @@ class BookList extends Component {
   }
 
   render() {
-    const books = this.state.bookData.map(book =>
-      <BookEntry title={book.title} author={book.author} genre={book.genre} key={book.id} />,
-    );
+    const books = [];
+    this.state.bookData.forEach((book) => {
+      if (book.title.toLowerCase().indexOf(this.props.query) === -1) {
+        return;
+      }
+      books.push(
+        <BookEntry
+          title={book.title}
+          author={book.author}
+          genre={book.genre}
+          key={book.id}
+        />,
+      );
+    });
+    //
+    // this.state.bookData.map(book =>
+    //   <BookEntry title={book.title} author={book.author} genre={book.genre} key={book.id} />,
+    // );
     return (
-      <ul>{books}</ul>
+      <div>{books}</div>
     );
   }
 }
