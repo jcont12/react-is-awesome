@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Book from './Book';
 import $ from 'jquery';
+import './App.css';
 
 class ListBooks extends Component {
   constructor() {
