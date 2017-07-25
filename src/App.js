@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LoggedInNav from './Nav';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -8,12 +8,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <img src="http://www.columbiactlibrary.org/wp-content/uploads/2012/10/books.png" className="App-logo" alt="logo" />
+          <h2>Welcome to Book Fools</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="nav">
+          <LoggedInNav />
+        </div>
       </div>
     );
   }
