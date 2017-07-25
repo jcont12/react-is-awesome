@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/lib/Navbar';
 import '../App.css';
 import NavBarItem from './NavBarItem';
-
+import SearchBar from './SearchBar';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class NavBar extends Component {
@@ -9,7 +11,6 @@ class NavBar extends Component {
     super();
     this.state = {
       linkData: [
-        { text: 'Home', url: '/' },
         { text: 'Log In', url: '/sessions/new' },
         { text: 'Sign Up', url: '/users/new' },
       ],
@@ -20,7 +21,17 @@ class NavBar extends Component {
       <NavBarItem text={link.text} url={link.url} key={link.text} />,
     );
     return (
-      <ul>{links}</ul>
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/">GoodReads</a>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav>
+          {links}
+        </Nav>
+        <SearchBar />
+      </Navbar>
     );
   }
 }

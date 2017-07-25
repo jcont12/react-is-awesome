@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import NavBar from './NavBar';
-import SearchBar from './SearchBar';
-import Header from './Header';
+import NavBar from '../layout/NavBar';
+import Row from './Row';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -10,9 +9,8 @@ class PageBody extends Component {
   render() {
     return (
       <div>
-        <Header title="GoodReads"/>
         <NavBar />
-        <SearchBar />
+        <Row />
       </div>
     );
   }

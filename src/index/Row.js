@@ -30,7 +30,7 @@ class Row extends Component {
       <Book title={book.title} author={book.author} genre={book.genre} key={book.id} />,
     );
     return (
-      <ul>{books}</ul>
+      <div>{books}</div>
     );
   }
 }

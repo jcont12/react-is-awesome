@@ -22,3 +22,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.book-info {
+  float: left;
+  width: 250px;
+  margin: 5px;
+  height: 125px;
+  text-align: center;
+  /*border: 1px solid red;*/
+}
