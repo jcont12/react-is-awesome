@@ -4,14 +4,25 @@ import LoggedInNav from './LoggedInNav';
 import LoggedOutNav from './LoggedOutNav';
 import BookList from './BookList';
 import BookShow from './BookShow';
+import Login from './Login';
+
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   constructor() {
     super();
     this.state = {
       isLoggedIn: false,
+      user: null,
+      defaultHome: <BookList clickHandler={e => this.clickHandler(e)} />,
       currentContent: <BookList clickHandler={e => this.clickHandler(e)} />,
     };
+  }
+
+  loggerInner(id) {
+    console.log(id)
+    if (id) {
+      this.setState({ user: id, isLoggedIn: true, currentContent: this.state.defaultHome})
+    }
   }
 
   clickHandler(e) {
@@ -19,17 +30,26 @@ class App extends Component {
     this.setState({ currentContent: <BookShow id={e.target.id} /> });
   }
 
-  homeClickHandler() {
-    this.setState({ currentContent: <BookList clickHandler={e => this.clickHandler(e)} /> });
+  navClickHandler(event) {
+    const page = event.target.id
+    if (page === 'home') {
+      this.setState({ currentContent: this.state.defaultHome });
+    } else if (page === 'login') {
+      this.setState({ currentContent: <Login formHandler={(id) => this.loggerInner(id)} /> });
+    } else if (page === 'sign up') {
+      this.setState({ currentContent: '<Sign up to be defined />' });
+    } else if (page === 'log out') {
+      this.setState({ currentContent: '<logout to be defined />' });
+    }
   }
 
 
   render() {
     let navBar = null;
     if (this.state.isLoggedIn) {
-      navBar = <LoggedInNav homeClickHandler={() => this.homeClickHandler()} />;
+      navBar = <LoggedInNav navClickHandler={(e) => this.navClickHandler(e)} />;
     } else {
-      navBar = <LoggedOutNav homeClickHandler={() => this.homeClickHandler()} />;
+      navBar = <LoggedOutNav navClickHandler={(e) => this.navClickHandler(e)} />;
     }
     return (
       <div className="App">
