@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class SavedReadingLists extends Component {
-  render() {
-    const linklist = this.props.lists.map(list => <p key={list.id}><a href="#" onClick={() => this.props.loadList(list.id - 1)}>{`List ${list.id}`}</a></p>);
-    return (
-      <div>{ linklist }</div>
-    );
-  }
+function SavedReadingLists(props) {
+  const linklist = props.lists.map(list =>
+    <p key={list.id}>
+      <a href="#" onClick={() => props.loadList(list.id - 1)}>
+        {`List ${list.id}`}
+      </a>
+    </p>);
+  return (
+    <div>{ linklist }</div>
+  );
 }
 
 SavedReadingLists.propTypes = {
