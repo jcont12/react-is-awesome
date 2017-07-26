@@ -33,12 +33,12 @@ class BookList extends Component {
         author={book.author}
         key={book.id}
         id={book.id}
-        clickHandler={(e) => this.props.clickHandler(e)}
+        clickHandler={e => this.props.clickHandler(e)}
       />,
     );
     return (
       <div>{ allTheBooks }</div>
-    )
+    );
   }
 
 }

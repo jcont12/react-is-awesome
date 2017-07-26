@@ -10,22 +10,26 @@ class App extends Component {
     super();
     this.state = {
       isLoggedIn: false,
-      currentContent: <BookList clickHandler={(e) => this.clickHandler(e)}/>,
+      currentContent: <BookList clickHandler={e => this.clickHandler(e)} />,
     };
   }
 
   clickHandler(e) {
-    e.preventDefault()
-    let bookId = e.target.id;
-    this.setState({ currentContent: <BookShow id={bookId} /> })
+    e.preventDefault();
+    this.setState({ currentContent: <BookShow id={e.target.id} /> });
   }
+
+  homeClickHandler() {
+    this.setState({ currentContent: <BookList clickHandler={e => this.clickHandler(e)} /> });
+  }
+
 
   render() {
     let navBar = null;
     if (this.state.isLoggedIn) {
-      navBar = <LoggedInNav />
+      navBar = <LoggedInNav homeClickHandler={() => this.homeClickHandler()} />;
     } else {
-      navBar = <LoggedOutNav />
+      navBar = <LoggedOutNav homeClickHandler={() => this.homeClickHandler()} />;
     }
     return (
       <div className="App">

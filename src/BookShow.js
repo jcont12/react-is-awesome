@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import './App.css';
-import Book from './Book'
+import Book from './Book';
 
 class BookShow extends Component {
   constructor() {
