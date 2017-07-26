@@ -9,6 +9,8 @@ class ReadingList extends React.Component {
       key={this.props.books[i].id}
       title={this.props.books[i].title}
       author={this.props.books[i].author}
+      id={this.props.books[i].id}
+      showBook={() => this.props.showBook(this.props.books[i])}
     />);
   }
 
@@ -40,6 +42,7 @@ ReadingList.propTypes = {
   newList: PropTypes.func.isRequired,
   wasSaved: PropTypes.bool,
   loggedIn: PropTypes.bool,
+  showBook: PropTypes.func.isRequired,
 };
 
 ReadingList.defaultProps = {

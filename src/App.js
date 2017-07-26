@@ -5,6 +5,7 @@ import ReadingList from './reading-list';
 import SelectableBookList from './selectable-book-list';
 import SavedReadingLists from './saved-reading-lists';
 import SessionController from './session-controller';
+import BookInfo from './book-info';
 
 class App extends Component {
   constructor() {
@@ -18,10 +19,14 @@ class App extends Component {
       loadedList: false,
       originalBooks: [],
       isLoggedIn: false,
+      showingBook: false,
+      shownBook: null,
     };
 
     this.filterBooks = this.filterBooks.bind(this);
     this.selectBook = this.selectBook.bind(this);
+    this.showBookInfo = this.showBookInfo.bind(this);
+    this.showAllBooks = this.showAllBooks.bind(this);
     this.saveList = this.saveList.bind(this);
     this.loadList = this.loadList.bind(this);
     this.newList = this.newList.bind(this);
@@ -60,6 +65,20 @@ class App extends Component {
       readingList: newBookList,
       loadedList: false,
     }, this.filterBooks);
+  }
+
+  showBookInfo(book) {
+    this.setState({
+      showingBook: true,
+      shownBook: book,
+    });
+  }
+
+  showAllBooks() {
+    this.setState({
+      showingBook: false,
+      shownBook: null,
+    });
   }
 
   saveList() {
@@ -114,6 +133,7 @@ class App extends Component {
             newList={this.newList}
             wasSaved={this.state.loadedList}
             loggedIn={this.state.isLoggedIn}
+            showBook={this.showBookInfo}
           />
         </div>
         <div className="saved-lists">
@@ -123,12 +143,19 @@ class App extends Component {
             loadList={this.loadList}
           />
         </div>
-        <h2>All Books</h2>
-        <SelectableBookList
-          books={this.state.books}
-          selectBook={this.selectBook}
-          loggedIn={this.state.isLoggedIn}
-        />
+        {
+          (this.state.showingBook) ?
+            <BookInfo
+              book={this.state.shownBook}
+              showAllBooks={this.showAllBooks}
+            /> :
+            <SelectableBookList
+              books={this.state.books}
+              selectBook={this.selectBook}
+              showBookInfo={this.showBookInfo}
+              loggedIn={this.state.isLoggedIn}
+            />
+        }
       </div>
     );
   }

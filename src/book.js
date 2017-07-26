@@ -4,13 +4,17 @@ import './App.css';
 
 function Book(props) {
   return (
-    <div>Title: {props.title} - By {props.author}</div>
+    <a href="#" onClick={() => props.showBook(props.id)}>
+      <div>Title: {props.title} - By {props.author}</div>
+    </a>
   );
 }
 
 Book.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  showBook: PropTypes.func.isRequired,
 };
 
 export default Book;

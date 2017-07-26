@@ -21,19 +21,27 @@ function SelectableBookList(props) {
             <Book
               title={book.title}
               author={book.author}
+              id={book.id}
+              showBook={() => props.showBookInfo(book)}
             />
           </div>
         </div>
       );
     }) :
     'Loading books....';
-  return <div>{bookItems}</div>;
+  return (
+    <div>
+      <h2>All Books</h2>
+      <div>{bookItems}</div>
+    </div>
+  );
 }
 
 SelectableBookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object),
   selectBook: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  showBookInfo: PropTypes.func.isRequired,
 };
 
 SelectableBookList.defaultProps = {
