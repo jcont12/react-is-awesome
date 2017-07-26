@@ -2,39 +2,16 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 class Login extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     username: '',
-  //     password: '',
-  //   };
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/sessions',
-      data: {
-        user: {
-          name: 'dbc',
-          password: 'pw',
-        },
-      },
+      data: $(e.target).serialize()
     }).done((data) => {
-      console.log(data);
-      console.log(this.props)
-      this.props.formHandler(data.user_id);
+      this.props.formHandler(data);
     });
   }
-  //
-  // handleUsernameChange() {
-  //   this.setState({ username: e.target.value});
-  // }
-  //
-  // handlePasswordChange() {
-  //   this.setState({ password: e.target.value});
-  // }
 
   render() {
     return (

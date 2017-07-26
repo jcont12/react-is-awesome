@@ -13,16 +13,25 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       user: null,
+      token: null,
       defaultHome: <BookList clickHandler={e => this.clickHandler(e)} />,
       currentContent: <BookList clickHandler={e => this.clickHandler(e)} />,
     };
   }
 
-  loggerInner(id) {
-    console.log(id)
-    if (id) {
-      this.setState({ user: id, isLoggedIn: true, currentContent: this.state.defaultHome})
+  loggerInner(data) {
+    if (data.user_id) {
+      this.setState({
+        user: data.user_id,
+        isLoggedIn: true,
+        token: data.token,
+        currentContent: this.state.defaultHome,
+      });
     }
+  }
+
+  loggerOuter() {
+    this.setState({ user: null, isLoggedIn: false, token: null });
   }
 
   clickHandler(e) {
@@ -31,7 +40,7 @@ class App extends Component {
   }
 
   navClickHandler(event) {
-    const page = event.target.id
+    const page = event.target.id;
     if (page === 'home') {
       this.setState({ currentContent: this.state.defaultHome });
     } else if (page === 'login') {
@@ -39,7 +48,10 @@ class App extends Component {
     } else if (page === 'sign up') {
       this.setState({ currentContent: '<Sign up to be defined />' });
     } else if (page === 'log out') {
-      this.setState({ currentContent: '<logout to be defined />' });
+      this.loggerOuter();
+      this.setState({ currentContent: this.state.defaultHome });
+    } else if (page === 'user-show') {
+      this.setState({ currentContent: '<User show to be defined' });
     }
   }
 
