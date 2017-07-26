@@ -9,6 +9,7 @@ class SessionController extends Component {
       username: '',
       password: '',
       isLogin: false,
+      errors: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,37 +37,43 @@ class SessionController extends Component {
             password: this.state.password,
           },
         },
-        () => { console.log('user created successfully'); },
-      ).fail((response) => { console.log(response); });
+        () => { this.setState({ errors: '' }); },
+      ).fail((response) => {
+        const responseText = JSON.parse(response.responseText);
+        this.setState({ errors: responseText.message });
+      });
     }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} >
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            id="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-        </label>
+      <div>
+        <div>{this.state.errors}</div>
+        <form onSubmit={this.handleSubmit} >
+          <label htmlFor="username">
+            Username:
+            <input
+              type="text"
+              id="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+          </label>
 
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </label>
+          <label htmlFor="password">
+            Password:
+            <input
+              type="password"
+              id="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </label>
 
-        <input type="submit" value="Register" onClick={() => this.setLogin(false)} />
-        <input type="submit" value="Login" onClick={() => this.setLogin(true)} />
-      </form>
+          <input type="submit" value="Register" onClick={() => this.setLogin(false)} />
+          <input type="submit" value="Login" onClick={() => this.setLogin(true)} />
+        </form>
+      </div>
     );
   }
 }
