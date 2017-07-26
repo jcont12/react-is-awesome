@@ -3,3 +3,26 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+button,
+input[type="submit"]{
+  border: none;
+  padding: 5px;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+form input {
+  padding: 5px;
+  margin: 5px;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: grey;
+}
+
+a:hover {
+  color: green;
+}
