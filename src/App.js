@@ -15,6 +15,7 @@ class App extends Component {
       savedLists: [],
       currentList: 1,
       loadedList: false,
+      originalBooks: [],
     };
   }
   componentDidMount() {
@@ -22,25 +23,35 @@ class App extends Component {
   }
 
   getAllBooks() {
-    $.get('http://localhost:3000/books', (data) => {
-      this.setState({ books: data });
-    });
+    if (this.state.originalBooks.length === 0) {
+      $.get('http://localhost:3000/books', (data) => {
+        this.setState({
+          books: data,
+          originalBooks: data,
+        });
+      });
+    } else {
+      this.setState({ books: this.state.originalBooks });
+    }
   }
 
   render() {
+    const filterBooks = () => {
+      const filteredBooks = this.state.books.filter(
+        filterBook => !(this.state.readingList.includes(filterBook)),
+      );
+      this.setState({
+        books: filteredBooks,
+      });
+    };
+
     const selectBook = (book) => {
       const newBookList = this.state.readingList.slice();
-      if (!newBookList.includes(book)) {
-        newBookList.push(book);
-        const newBooks = this.state.books.filter(filterBook =>
-          filterBook !== book,
-        );
-        this.setState({
-          readingList: newBookList,
-          books: newBooks,
-          loadedList: false,
-        });
-      }
+      newBookList.push(book);
+      this.setState({
+        readingList: newBookList,
+        loadedList: false,
+      }, filterBooks);
     };
 
     const saveList = () => {
@@ -58,7 +69,7 @@ class App extends Component {
       this.setState({
         readingList: this.state.savedLists[listIndex].list,
         loadedList: true,
-      });
+      }, filterBooks);
     };
 
     return (
