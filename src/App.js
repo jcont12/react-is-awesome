@@ -72,6 +72,14 @@ class App extends Component {
       }, filterBooks);
     };
 
+    const newList = () => {
+      this.getAllBooks();
+      this.setState({
+        readingList: [],
+        loadedList: false,
+      });
+    };
+
     return (
       <div>
         <h1>BOOKZ</h1>
@@ -79,6 +87,7 @@ class App extends Component {
           <ReadingList
             books={this.state.readingList}
             saveList={saveList}
+            newList={newList}
             wasSaved={this.state.loadedList}
           />
         </div>

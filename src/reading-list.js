@@ -17,6 +17,8 @@ class ReadingList extends React.Component {
     let saveButton;
     if (bookItems.length > 0 && !this.props.wasSaved) {
       saveButton = <button onClick={this.props.saveList}>Save List</button>;
+    } else if (this.props.wasSaved) {
+      saveButton = <button onClick={this.props.newList}>New List</button>;
     } else {
       saveButton = <div />;
     }
@@ -33,6 +35,7 @@ class ReadingList extends React.Component {
 ReadingList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
   saveList: PropTypes.func.isRequired,
+  newList: PropTypes.func.isRequired,
   wasSaved: PropTypes.bool,
 };
 
