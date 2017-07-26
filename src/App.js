@@ -10,8 +10,15 @@ class App extends Component {
     super();
     this.state = {
       isLoggedIn: false,
+      currentContent: <BookList clickHandler={(e) => this.clickHandler(e)}/>,
     };
   }
+
+  clickHandler(e) {
+    e.preventDefault()
+   this.setState({ currentContent: <BookShow /> })
+  }
+
   render() {
     let navBar = null;
     if (this.state.isLoggedIn) {
@@ -28,11 +35,8 @@ class App extends Component {
 
         <div className="nav">
           {navBar}
-          <div>
-          <BookShow />
         </div>
-        </div>
-        <BookList />
+        {this.state.currentContent}
       </div>
     );
   }

@@ -5,7 +5,7 @@ function Book(props) {
   return (
     <ul className="book-list">
       <li><b>
-        <a onClick={bookClickHandler} href="book">{props.title}</a>
+        <a onClick={props.clickHandler} id={props.id} href={'/books/' + props.id}>{props.title}</a>
       </b></li>
       <li>Author: <i>{props.author}</i></li>
       <li>Genre: {props.genre}</li>

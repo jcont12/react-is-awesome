@@ -24,14 +24,10 @@ class BookList extends Component {
     });
   }
 
-  bookClickHandler() {
-    alert('yo it works')
-  }
-
   render() {
     // console.log(this.state.bookData);
     const allTheBooks = this.state.bookData.map(book =>
-      <Book title={book.title} genre={book.genre} author={book.author} key={book.id} />,
+      <Book title={book.title} genre={book.genre} author={book.author} key={book.id} id={book.id} clickHandler={(e) => this.props.clickHandler(e)} />,
     );
     return (
       <div>{ allTheBooks }</div>
