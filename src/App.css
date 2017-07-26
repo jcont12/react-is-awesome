@@ -31,3 +31,11 @@
   text-align: center;
   /*border: 1px solid red;*/
 }
+
+.form-input {
+  width: 45%
+}
+
+.new-user-form {
+  margin-left: 350px;
+}
