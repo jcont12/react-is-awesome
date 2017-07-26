@@ -29,7 +29,7 @@ class ListBooks extends Component {
       <Book title={book.title} author={book.author} genre={book.genre} key={book.id} />,
     );
     return (
-      <div>{books}</div>
+      <div>{ books }</div>
     );
   }
 }
