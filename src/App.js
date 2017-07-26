@@ -10,20 +10,37 @@ class App extends Component {
     super();
     this.state = {
       query: '',
-      current_page: 'signup',
+      current_page: 'index',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleRegisteredChange = this.handleRegisteredChange.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
+
   handleInputChange(input) {
     this.setState({
       query: input,
     });
   }
+
+  handleRegisteredChange() {
+    this.setState({
+      current_page: 'index',
+    });
+  }
+
+  handleSignUp() {
+    this.setState({
+      current_page: 'signup',
+    });
+  }
+
   render() {
     if (this.state.current_page === 'index') {
       return (
         <div>
           <h1>BookBook</h1>
+          <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
           <SearchBar
             onInputChange={this.handleInputChange}
           />
@@ -35,7 +52,7 @@ class App extends Component {
         <div>
           <h1>BookBook</h1>
           <p>Sign up!</p>
-          <SignUpForm />
+          <SignUpForm onRegistered={this.handleRegisteredChange} />
         </div>
       );
     }

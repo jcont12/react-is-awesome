@@ -3,6 +3,29 @@ import $ from 'jquery';
 
 
 class SignUpForm extends Component {
+  constructor() {
+    super();
+    this.sendUserData = this.sendUserData.bind(this);
+    this.handleRegistered = this.handleRegistered.bind(this);
+  }
+
+  handleRegistered() {
+    this.props.onRegistered();
+  }
+
+  sendUserData(e) {
+    e.preventDefault();
+    const userData = $('form').serialize();
+    $.ajax({
+      url: 'http://localhost:3000/users',
+      method: 'POST',
+      data: userData,
+    }).done(() => {
+      this.handleRegistered();
+    }).fail(() => { console.log('fail'); });
+  }
+
+
   render() {
     return (
       <form onSubmit={this.sendUserData}>
@@ -13,19 +36,6 @@ class SignUpForm extends Component {
         <input type="submit" value="Create" />
       </form>
     );
-  }
-
-  sendUserData(e) {
-    e.preventDefault();
-    // const nameData = $('form').closest('#name').val();
-    // const passwordData = $('form').closest('#password').val();
-    const userData = $('form').serialize();
-    $.ajax({
-      url: 'http://localhost:3000/users',
-      method: 'POST',
-      data: userData,
-    }).done(function() {console.log('success')})
-    .fail(function() {console.log('fail')});
   }
 }
 
