@@ -65,7 +65,6 @@ class App extends Component {
         return (
           <div>
             <h1>BookBook</h1>
-            <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
             <button onClick={this.handleLogOut}> Log out </button><br /><br />
             <SearchBar
               onInputChange={this.handleInputChange}
