@@ -4,6 +4,7 @@ import './App.css';
 import ReadingList from './reading-list';
 import SelectableBookList from './selectable-book-list';
 import SavedReadingLists from './saved-reading-lists';
+import SessionController from './session-controller';
 
 class App extends Component {
   constructor() {
@@ -83,6 +84,7 @@ class App extends Component {
     return (
       <div>
         <h1>BOOKZ</h1>
+        <SessionController />
         <div>
           <ReadingList
             books={this.state.readingList}
