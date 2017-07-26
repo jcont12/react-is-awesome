@@ -10,7 +10,10 @@ function SelectableBookList(props) {
       const chooseBook = () => { selectBook(book); };
       return (
         <div key={book.id}>
-          <button onClick={chooseBook}>Add to List</button>
+          { props.loggedIn ?
+            <button onClick={chooseBook}>Add to List</button> :
+            <span />
+          }
           <Book
             title={book.title}
             author={book.author}
@@ -25,6 +28,7 @@ function SelectableBookList(props) {
 SelectableBookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object),
   selectBook: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 SelectableBookList.defaultProps = {

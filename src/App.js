@@ -111,7 +111,11 @@ class App extends Component {
           <SavedReadingLists lists={this.state.savedLists} loadList={this.loadList} />
         </div>
         <h2>All Books</h2>
-        <SelectableBookList books={this.state.books} selectBook={this.selectBook} />
+        <SelectableBookList
+          books={this.state.books}
+          selectBook={this.selectBook}
+          loggedIn={this.state.isLoggedIn}
+        />
       </div>
     );
   }
