@@ -63,6 +63,10 @@ class App extends Component {
   }
 
   saveList() {
+    /*
+    For each book in readingList-
+      Make ajax call to PUT /users/:user_id/books/:id
+    */
     this.setState({
       savedLists: this.state.savedLists.concat(
         [{ list: this.state.readingList, id: this.state.currentList }]),
@@ -74,6 +78,10 @@ class App extends Component {
   }
 
   loadList(listIndex) {
+    /*
+    Make ajax call to users/:id/books
+    Populate readingList with those books
+    */
     this.setState({
       readingList: this.state.savedLists[listIndex].list,
       loadedList: true,
