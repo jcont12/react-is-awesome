@@ -23,3 +23,9 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.saved-lists {
+  position: fixed;
+  right: 10%;
+  top:10%;
+}
