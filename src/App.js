@@ -113,6 +113,7 @@ class App extends Component {
             saveList={this.saveList}
             newList={this.newList}
             wasSaved={this.state.loadedList}
+            loggedIn={this.state.isLoggedIn}
           />
         </div>
         <div>

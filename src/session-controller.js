@@ -65,7 +65,6 @@ class SessionController extends Component {
   }
 
   render() {
-    console.log(this.props.loggedIn);
     return (
       <div>
         <div>{this.state.errors}</div>

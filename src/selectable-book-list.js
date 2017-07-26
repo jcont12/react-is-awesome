@@ -4,6 +4,9 @@ import './App.css';
 import Book from './book';
 
 function SelectableBookList(props) {
+  const inlineStyle = {
+    display: 'inline-block',
+  };
   const selectBook = props.selectBook;
   const bookItems = props.books.length > 0 ?
     props.books.map((book) => {
@@ -14,10 +17,12 @@ function SelectableBookList(props) {
             <button onClick={chooseBook}>Add to List</button> :
             <span />
           }
-          <Book
-            title={book.title}
-            author={book.author}
-          />
+          <div style={inlineStyle}>
+            <Book
+              title={book.title}
+              author={book.author}
+            />
+          </div>
         </div>
       );
     }) :
