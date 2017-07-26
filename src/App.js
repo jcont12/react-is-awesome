@@ -18,6 +18,12 @@ class App extends Component {
       loadedList: false,
       originalBooks: [],
     };
+
+    this.filterBooks = this.filterBooks.bind(this);
+    this.selectBook = this.selectBook.bind(this);
+    this.saveList = this.saveList.bind(this);
+    this.loadList = this.loadList.bind(this);
+    this.newList = this.newList.bind(this);
   }
   componentDidMount() {
     this.getAllBooks();
@@ -36,51 +42,51 @@ class App extends Component {
     }
   }
 
+  filterBooks() {
+    const filteredBooks = this.state.books.filter(
+      filterBook => !(this.state.readingList.includes(filterBook)),
+    );
+    this.setState({
+      books: filteredBooks,
+    });
+  }
+
+  selectBook(book) {
+    const newBookList = this.state.readingList.slice();
+    newBookList.push(book);
+    this.setState({
+      readingList: newBookList,
+      loadedList: false,
+    }, this.filterBooks);
+  }
+
+  saveList() {
+    this.setState({
+      savedLists: this.state.savedLists.concat(
+        [{ list: this.state.readingList, id: this.state.currentList }]),
+      currentList: this.state.currentList + 1,
+      readingList: [],
+      loadedList: false,
+    });
+    this.getAllBooks();
+  }
+
+  loadList(listIndex) {
+    this.setState({
+      readingList: this.state.savedLists[listIndex].list,
+      loadedList: true,
+    }, this.filterBooks);
+  }
+
+  newList() {
+    this.getAllBooks();
+    this.setState({
+      readingList: [],
+      loadedList: false,
+    });
+  }
+
   render() {
-    const filterBooks = () => {
-      const filteredBooks = this.state.books.filter(
-        filterBook => !(this.state.readingList.includes(filterBook)),
-      );
-      this.setState({
-        books: filteredBooks,
-      });
-    };
-
-    const selectBook = (book) => {
-      const newBookList = this.state.readingList.slice();
-      newBookList.push(book);
-      this.setState({
-        readingList: newBookList,
-        loadedList: false,
-      }, filterBooks);
-    };
-
-    const saveList = () => {
-      this.setState({
-        savedLists: this.state.savedLists.concat(
-          [{ list: this.state.readingList, id: this.state.currentList }]),
-        currentList: this.state.currentList + 1,
-        readingList: [],
-        loadedList: false,
-      });
-      this.getAllBooks();
-    };
-
-    const loadList = (listIndex) => {
-      this.setState({
-        readingList: this.state.savedLists[listIndex].list,
-        loadedList: true,
-      }, filterBooks);
-    };
-
-    const newList = () => {
-      this.getAllBooks();
-      this.setState({
-        readingList: [],
-        loadedList: false,
-      });
-    };
-
     return (
       <div>
         <h1>BOOKZ</h1>
@@ -88,16 +94,16 @@ class App extends Component {
         <div>
           <ReadingList
             books={this.state.readingList}
-            saveList={saveList}
-            newList={newList}
+            saveList={this.saveList}
+            newList={this.newList}
             wasSaved={this.state.loadedList}
           />
         </div>
         <div>
-          <SavedReadingLists lists={this.state.savedLists} loadList={loadList} />
+          <SavedReadingLists lists={this.state.savedLists} loadList={this.loadList} />
         </div>
         <h2>All Books</h2>
-        <SelectableBookList books={this.state.books} selectBook={selectBook} />
+        <SelectableBookList books={this.state.books} selectBook={this.selectBook} />
       </div>
     );
   }

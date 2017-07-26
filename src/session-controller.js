@@ -14,6 +14,10 @@ class SessionController extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  setLogin(loginState) {
+    this.setState({ isLogin: loginState });
+  }
+
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
@@ -25,11 +29,6 @@ class SessionController extends Component {
     } else {
       console.log('New User Code Goes Here');
     }
-  }
-
-  setLogin(loginState) {
-    this.setState({ isLogin: loginState });
-    console.log(loginState);
   }
 
   render() {
