@@ -16,7 +16,8 @@ class App extends Component {
 
   clickHandler(e) {
     e.preventDefault()
-   this.setState({ currentContent: <BookShow /> })
+    let bookId = e.target.id;
+    this.setState({ currentContent: <BookShow id={bookId} /> })
   }
 
   render() {

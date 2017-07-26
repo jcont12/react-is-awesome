@@ -12,13 +12,13 @@ class BookShow extends Component {
   }
 
   componentDidMount() {
-    this.getBookDetails();
+    this.getBookDetails(this.props.id);
   }
 
-  getBookDetails() {
+  getBookDetails(id) {
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/books/6',
+      url: `http://localhost:3000/books/${id}`,
     }).done((response) => {
       this.setState({ bookDetails: response });
     });
