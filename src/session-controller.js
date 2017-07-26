@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 
 class SessionController extends Component {
   constructor() {
@@ -27,7 +28,16 @@ class SessionController extends Component {
     if (this.state.isLogin) {
       console.log('Login Code Goes Here');
     } else {
-      console.log('New User Code Goes Here');
+      $.post(
+        'http://localhost:3000/users',
+        {
+          user: {
+            name: this.state.username,
+            password: this.state.password,
+          },
+        },
+        () => { console.log('user created successfully'); },
+      ).fail((response) => { console.log(response); });
     }
   }
 
