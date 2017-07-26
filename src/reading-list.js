@@ -15,6 +15,7 @@ class ReadingList extends React.Component {
   render() {
     const bookItems = this.props.books.map((book, index) => this.renderBook(index));
     let saveButton;
+
     if (bookItems.length > 0 && !this.props.wasSaved) {
       saveButton = <button onClick={this.props.saveList}>Save List</button>;
     } else if (this.props.wasSaved && this.props.loggedIn) {
@@ -22,6 +23,7 @@ class ReadingList extends React.Component {
     } else {
       saveButton = <div />;
     }
+
     return (
       <div>
         <h2>Reading List</h2>

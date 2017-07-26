@@ -104,7 +104,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <h1>BOOKZ</h1>
         <SessionController updateSession={this.updateSession} loggedIn={this.state.isLoggedIn} />
         <div>

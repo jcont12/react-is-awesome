@@ -10,6 +10,7 @@ class SessionController extends Component {
       password: '',
       actionIsLogin: false,
       errors: '',
+      token: '',
     };
 
     this.updateSession = props.updateSession;
@@ -32,13 +33,18 @@ class SessionController extends Component {
       $.post(
         'http://localhost:3000/sessions',
         {
-          token: 'whatever',
           user: {
             name: this.state.username,
             password: this.state.password,
           },
         },
-        () => { this.updateSession(true); },
+        (response) => {
+          this.updateSession(true);
+          this.setState({
+            errors: '',
+            token: response.token,
+          });
+        },
       ).fail((response) => {
         const responseText = JSON.parse(response.responseText);
         this.setState({ errors: responseText.message });
@@ -52,7 +58,11 @@ class SessionController extends Component {
             password: this.state.password,
           },
         },
-        () => { this.setState({ errors: '' }); },
+        () => {
+          this.setState({
+            errors: 'User created successfully',
+          });
+        },
       ).fail((response) => {
         const responseText = JSON.parse(response.responseText);
         this.setState({ errors: responseText.message });
@@ -62,6 +72,7 @@ class SessionController extends Component {
 
   logout() {
     this.updateSession(false);
+    this.setState({ username: '', password: '' });
   }
 
   render() {
@@ -72,26 +83,20 @@ class SessionController extends Component {
           <input type="submit" value="Logout" onClick={this.logout} />
           ) : (
             <form onSubmit={this.handleSubmit} >
-              <label htmlFor="username">
-                Username:
-                <input
-                  type="text"
-                  id="username"
-                  value={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </label>
-
-              <label htmlFor="password">
-                Password:
-                <input
-                  type="password"
-                  id="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </label>
-
+              <input
+                type="text"
+                id="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                placeholder="Password"
+              />
               <input type="submit" value="Register" onClick={() => this.setLogin(false)} />
               <input type="submit" value="Login" onClick={() => this.setLogin(true)} />
             </form>
