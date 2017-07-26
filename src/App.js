@@ -17,6 +17,7 @@ class App extends Component {
       currentList: 1,
       loadedList: false,
       originalBooks: [],
+      isLoggedIn: false,
     };
 
     this.filterBooks = this.filterBooks.bind(this);
@@ -24,6 +25,7 @@ class App extends Component {
     this.saveList = this.saveList.bind(this);
     this.loadList = this.loadList.bind(this);
     this.newList = this.newList.bind(this);
+    this.updateSession = this.updateSession.bind(this);
   }
   componentDidMount() {
     this.getAllBooks();
@@ -86,11 +88,17 @@ class App extends Component {
     });
   }
 
+  updateSession(loggedIn) {
+    this.setState({
+      isLoggedIn: loggedIn,
+    });
+  }
+
   render() {
     return (
       <div>
         <h1>BOOKZ</h1>
-        <SessionController />
+        <SessionController updateSession={this.updateSession} loggedIn={this.state.isLoggedIn} />
         <div>
           <ReadingList
             books={this.state.readingList}
