@@ -22,6 +22,7 @@ class SignInForm extends Component {
       data: userData,
     }).done((response) => {
       this.handleSignedIn(response.token);
+      console.log(response);
     }).fail(() => { console.log('failed login'); });
   }
 

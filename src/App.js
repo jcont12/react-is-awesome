@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import BookList from './BookList';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
+import UserBooks from './UserBooks';
 import './App.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -12,7 +13,7 @@ class App extends Component {
     this.state = {
       query: '',
       current_page: 'index',
-      userToken: '',
+      userToken: 'eyJ0b2tlbiI6MTkzfQ==\\n',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleRegisteredChange = this.handleRegisteredChange.bind(this);
@@ -66,6 +67,8 @@ class App extends Component {
           <div>
             <h1>BookBook</h1>
             <button onClick={this.handleLogOut}> Log out </button><br /><br />
+            <UserBooks />
+            <h2>All books: </h2>
             <SearchBar
               onInputChange={this.handleInputChange}
             />
@@ -78,6 +81,7 @@ class App extends Component {
           <h1>BookBook</h1>
           <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
           <button onClick={this.handleSignIn}> Sign in! </button><br /><br />
+          <h2>All books: </h2>
           <SearchBar
             onInputChange={this.handleInputChange}
           />
