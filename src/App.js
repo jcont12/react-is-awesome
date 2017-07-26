@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import BookList from './BookList';
 import SignUpForm from './SignUpForm';
+import SignInForm from './SignInForm';
 import './App.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -11,10 +12,14 @@ class App extends Component {
     this.state = {
       query: '',
       current_page: 'index',
+      userToken: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleRegisteredChange = this.handleRegisteredChange.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.handleSignedInChange = this.handleSignedInChange.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   handleInputChange(input) {
@@ -35,12 +40,45 @@ class App extends Component {
     });
   }
 
+  handleSignedInChange(token) {
+    this.setState({
+      current_page: 'index',
+      userToken: token,
+    });
+  }
+
+  handleLogOut() {
+    this.setState({
+      userToken: '',
+    });
+  }
+
+  handleSignIn() {
+    this.setState({
+      current_page: 'signin',
+    });
+  }
+
   render() {
     if (this.state.current_page === 'index') {
+      if (this.state.userToken !== '') {
+        return (
+          <div>
+            <h1>BookBook</h1>
+            <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
+            <button onClick={this.handleLogOut}> Log out </button><br /><br />
+            <SearchBar
+              onInputChange={this.handleInputChange}
+            />
+            <BookList query={this.state.query} />
+          </div>
+        );
+      }
       return (
         <div>
           <h1>BookBook</h1>
           <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
+          <button onClick={this.handleSignIn}> Sign in! </button><br /><br />
           <SearchBar
             onInputChange={this.handleInputChange}
           />
@@ -59,9 +97,11 @@ class App extends Component {
     return (
       <div>
         <h1>BookBook</h1>
-        <p>Signed out!</p>
+        <p>Sign in!</p>
+        <SignInForm onSignedIn={this.handleSignedInChange} />
       </div>
     );
   }
 }
+
 export default App;
