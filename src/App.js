@@ -12,8 +12,10 @@ class App extends Component {
     super();
     this.state = {
       query: '',
-      current_page: 'index',
-      userToken: 'eyJ0b2tlbiI6MTkzfQ==\\n',
+      currentPage: 'index',
+      userToken: '',
+      userId: '',
+      fetch: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleRegisteredChange = this.handleRegisteredChange.bind(this);
@@ -21,6 +23,8 @@ class App extends Component {
     this.handleSignedInChange = this.handleSignedInChange.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleHome = this.handleHome.bind(this);
+    this.inceptionAddedBook = this.inceptionAddedBook.bind(this);
   }
 
   handleInputChange(input) {
@@ -31,20 +35,21 @@ class App extends Component {
 
   handleRegisteredChange() {
     this.setState({
-      current_page: 'index',
+      currentPage: 'index',
     });
   }
 
   handleSignUp() {
     this.setState({
-      current_page: 'signup',
+      currentPage: 'signup',
     });
   }
 
-  handleSignedInChange(token) {
+  handleSignedInChange(token, id) {
     this.setState({
-      current_page: 'index',
+      currentPage: 'index',
       userToken: token,
+      userId: id,
     });
   }
 
@@ -56,29 +61,44 @@ class App extends Component {
 
   handleSignIn() {
     this.setState({
-      current_page: 'signin',
+      currentPage: 'signin',
+    });
+  }
+
+  handleHome() {
+    this.setState({
+      currentPage: 'index',
+    });
+  }
+
+  inceptionAddedBook() {
+    this.setState ({
+      fetch: (this.state.fetch) + 1,
     });
   }
 
   render() {
-    if (this.state.current_page === 'index') {
+    if (this.state.currentPage === 'index') {
       if (this.state.userToken !== '') {
         return (
           <div>
             <h1>BookBook</h1>
+            <button onClick={this.handleHome}>Home</button>
             <button onClick={this.handleLogOut}> Log out </button><br /><br />
-            <UserBooks />
+            <UserBooks fetch={this.state.fetch} userToken={this.state.userToken} userId={this.state.userId} />
             <h2>All books: </h2>
             <SearchBar
               onInputChange={this.handleInputChange}
             />
-            <BookList query={this.state.query} />
+            <BookList includeButton={'true'} query={this.state.query} userId={this.state.userId} userToken={this.state.userToken}
+            onSuperHandleAddedBook={this.inceptionAddedBook} />
           </div>
         );
       }
       return (
         <div>
           <h1>BookBook</h1>
+          <button onClick={this.handleHome}>Home</button>
           <button onClick={this.handleSignUp}> Sign up! </button><br /><br />
           <button onClick={this.handleSignIn}> Sign in! </button><br /><br />
           <h2>All books: </h2>
@@ -88,10 +108,11 @@ class App extends Component {
           <BookList query={this.state.query} />
         </div>
       );
-    } else if (this.state.current_page === 'signup') {
+    } else if (this.state.currentPage === 'signup') {
       return (
         <div>
           <h1>BookBook</h1>
+          <button onClick={this.handleHome}>Home</button>
           <p>Sign up!</p>
           <SignUpForm onRegistered={this.handleRegisteredChange} />
         </div>
@@ -100,6 +121,7 @@ class App extends Component {
     return (
       <div>
         <h1>BookBook</h1>
+        <button onClick={this.handleHome}>Home</button>
         <p>Sign in!</p>
         <SignInForm onSignedIn={this.handleSignedInChange} />
       </div>

@@ -10,6 +10,7 @@ class BookList extends Component {
     this.state = {
       bookData: [],
     };
+    this.handleAddedBook = this.handleAddedBook.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,10 @@ class BookList extends Component {
     }).done((data) => {
       this.setState({ bookData: data });
     });
+  }
+
+  handleAddedBook() {
+    this.props.onSuperHandleAddedBook();
   }
 
   render() {
@@ -40,6 +45,11 @@ class BookList extends Component {
           author={book.author}
           genre={book.genre}
           key={book.id}
+          id={book.id}
+          userId={this.props.userId}
+          userToken={this.props.userToken}
+          includeButton={this.props.includeButton}
+          onAddBook={this.handleAddedBook}
         />,
       );
     });

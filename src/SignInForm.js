@@ -9,8 +9,8 @@ class SignInForm extends Component {
     this.handleSignedIn = this.handleSignedIn.bind(this);
   }
 
-  handleSignedIn(token) {
-    this.props.onSignedIn(token);
+  handleSignedIn(token, id) {
+    this.props.onSignedIn(token, id);
   }
 
   sendLoginData(e) {
@@ -21,8 +21,8 @@ class SignInForm extends Component {
       method: 'POST',
       data: userData,
     }).done((response) => {
-      this.handleSignedIn(response.token);
       console.log(response);
+      this.handleSignedIn(response.token, response.user_id);
     }).fail(() => { console.log('failed login'); });
   }
 

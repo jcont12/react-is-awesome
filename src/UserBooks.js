@@ -3,16 +3,23 @@ import $ from 'jquery';
 import BookEntry from './BookEntry';
 
 class UserBooks extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       bookData: [],
-      userToken: 'eyJ0b2tlbiI6MTkzfQ==\\n',
-      userId: '193',
+      userToken: props.userToken,
+      userId: props.userId,
     };
   }
 
   componentDidMount() {
+    this.getBookData();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.fetch === nextProps.fetch ) {
+      return;
+    }
     this.getBookData();
   }
 
@@ -28,6 +35,7 @@ class UserBooks extends Component {
   }
 
   render() {
+    console.log(this.state.bookData);
     const books = this.state.bookData.map(book =>
       <BookEntry
         title={book.title}
