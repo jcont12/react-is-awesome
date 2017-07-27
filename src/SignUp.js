@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
+import $ from 'jquery';
 
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      value: 'value',
+      name: '',
+      password: '',
     };
   }
 
-  handleSubmit() {
-    console.log('submited')
+  handleSubmit(e) {
+    e.preventDefault();
+    let data = data.serialize();
+    $.ajax({
+      url: 'http://localhost:3000/sessions',
+      method: 'POST',
+      crossDomain: true,
+      xhrFields: { withCredentials: true },
+      data: data,
+    }).done((data) => {
+      this.setState({ userData: data });
+    });
   }
 
   render() {
@@ -18,6 +30,7 @@ class SignUp extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
+          {/* add onchange functions that grab data! */}
           <input type="text" value={this.state.value} />
         </label>
         <label>
