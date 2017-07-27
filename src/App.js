@@ -5,6 +5,7 @@ import LoggedOutNav from './LoggedOutNav';
 import BookList from './BookList';
 import BookShow from './BookShow';
 import Login from './Login';
+import UserShow from './UserShow'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
@@ -36,7 +37,11 @@ class App extends Component {
 
   clickHandler(e) {
     e.preventDefault();
-    this.setState({ currentContent: <BookShow id={e.target.id} /> });
+    this.setState({ currentContent: <BookShow clickHandler={e => this.userClickHandler(e)} id={e.target.id} userId={this.state.user} /> });
+  }
+
+  userClickHandler(id) {
+    this.setState({ currentContent: <UserShow userId={this.state.user} clickHandler={e => this.clickHandler(e)} /> })
   }
 
   navClickHandler(event) {
@@ -51,7 +56,7 @@ class App extends Component {
       this.loggerOuter();
       this.setState({ currentContent: this.state.defaultHome });
     } else if (page === 'user-show') {
-      this.setState({ currentContent: '<User show to be defined' });
+      this.setState({ currentContent: <UserShow userId={this.state.user} clickHandler={e => this.clickHandler(e)} /> });
     }
   }
 

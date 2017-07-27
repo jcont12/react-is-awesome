@@ -40,7 +40,6 @@ class BookList extends Component {
       <div>{ allTheBooks }</div>
     );
   }
-
 }
 
 export default BookList;

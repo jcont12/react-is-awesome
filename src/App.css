@@ -53,3 +53,8 @@
 .login-container {
   margin-top: 150px;
 }
+
+aside {
+  float: right;
+  margin-right: 30px;
+}
